@@ -13,4 +13,7 @@ export class Todo {
 
   @Column()
   isChecked: boolean;
+
+  // foreignKey: 'user_id'
+  // foreignKey: 'date_id'
 }

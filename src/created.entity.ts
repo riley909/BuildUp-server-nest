@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Todo } from './todos/todo.entity';
 
 @Entity()
 export class Created {
@@ -6,5 +7,8 @@ export class Created {
   id: number;
 
   @Column()
-  date: Date;
+  created: Date;
+
+  @OneToMany((_type) => Todo, (todo) => todo.created)
+  todos: Todo[];
 }

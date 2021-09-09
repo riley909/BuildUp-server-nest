@@ -5,11 +5,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodosModule } from './todos/todos.module';
 import { AuthModule } from './auth/auth.module';
+import { configValidationSchema } from './config.schema';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: [`.env.stage.${process.env.STAGE}`],
+      validationSchema: configValidationSchema,
     }),
     TodosModule,
     TypeOrmModule.forRootAsync({

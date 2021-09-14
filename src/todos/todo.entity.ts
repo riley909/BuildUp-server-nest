@@ -10,6 +10,9 @@ export class Todo {
   content: string;
 
   @Column()
+  created: Date;
+
+  @Column()
   order: number;
 
   @Column()

@@ -10,7 +10,7 @@ export class Todo {
   content: string;
 
   @Column()
-  created: Date;
+  created: string;
 
   @Column()
   order: number;

@@ -26,6 +26,7 @@ export class TodosRepository extends Repository<Todo> {
       user,
     });
 
+    await this.save(todo);
     return todo;
   }
 }

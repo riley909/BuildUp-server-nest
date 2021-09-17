@@ -3,6 +3,7 @@ import { EntityRepository, Repository } from 'typeorm';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './todo.entity';
 import * as dayjs from 'dayjs';
+import { NotFoundException } from '@nestjs/common';
 
 @EntityRepository(Todo)
 export class TodosRepository extends Repository<Todo> {
@@ -28,5 +29,13 @@ export class TodosRepository extends Repository<Todo> {
 
     await this.save(todo);
     return todo;
+  }
+
+  async deleteTodo(id: number, user: User): Promise<void> {
+    const result = await this.delete({ id, user });
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`ID "${id}" not found`);
+    }
   }
 }

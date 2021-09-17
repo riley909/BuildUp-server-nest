@@ -18,4 +18,8 @@ export class TodosService {
   createTodo(createTodoDto: CreateTodoDto, user: User): Promise<Todo> {
     return this.todosRepository.createTodo(createTodoDto, user);
   }
+
+  deleteTodo(id: number, user: User): Promise<void> {
+    return this.todosRepository.deleteTodo(id, user);
+  }
 }

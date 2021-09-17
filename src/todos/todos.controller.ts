@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';
@@ -22,5 +30,10 @@ export class TodosController {
     @GetUser() user: User,
   ): Promise<Todo> {
     return this.todosService.createTodo(createTodoDto, user);
+  }
+
+  @Delete('/:id')
+  deleteTodo(@Param('id') id: number, @GetUser() user: User): Promise<void> {
+    return this.todosService.deleteTodo(id, user);
   }
 }

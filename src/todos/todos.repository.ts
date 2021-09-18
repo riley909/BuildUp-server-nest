@@ -6,6 +6,7 @@ import * as dayjs from 'dayjs';
 import { NotFoundException } from '@nestjs/common';
 import { UpdateContentDto } from './dto/update-content.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
+import { UpdateOrderDto } from './dto/update-order.dto';
 
 @EntityRepository(Todo)
 export class TodosRepository extends Repository<Todo> {
@@ -73,6 +74,18 @@ export class TodosRepository extends Repository<Todo> {
     todo.isChecked = isChecked;
 
     await this.save(todo);
+    return todo;
+  }
+
+  async updateOrder(
+    id: number,
+    updateOrderDto: UpdateOrderDto,
+    user: User,
+  ): Promise<Todo> {
+    const { order } = updateOrderDto;
+    const todo = await this.getTodoById(id, user);
+    todo.order = order;
+
     return todo;
   }
 }

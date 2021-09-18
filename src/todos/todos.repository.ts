@@ -15,6 +15,15 @@ export class TodosRepository extends Repository<Todo> {
     return todos;
   }
 
+  async getTodoById(id: number, user: User): Promise<Todo> {
+    const found = await this.findOne({ where: { id, user } });
+
+    if (!found) {
+      throw new NotFoundException(`ID "${id}" not found`);
+    }
+    return found;
+  }
+
   async createTodo(createTodoDto: CreateTodoDto, user: User): Promise<Todo> {
     const { content, order } = createTodoDto;
 

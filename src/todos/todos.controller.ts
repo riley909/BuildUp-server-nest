@@ -13,6 +13,7 @@ import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
+import { UpdateStatusDto } from './dto/update-status.dto';
 import { Todo } from './todo.entity';
 import { TodosService } from './todos.service';
 
@@ -51,5 +52,14 @@ export class TodosController {
     @GetUser() user: User,
   ): Promise<Todo> {
     return this.todosService.updateContent(id, updateContentDto, user);
+  }
+
+  @Patch('/:id/status')
+  updateStatus(
+    @Param('id') id: number,
+    @Body() updateStatusDto: UpdateStatusDto,
+    @GetUser() user: User,
+  ): Promise<Todo> {
+    return this.todosService.updateStatus(id, updateStatusDto, user);
   }
 }

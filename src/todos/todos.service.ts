@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/auth/user.entity';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateContentDto } from './dto/update-content.dto';
+import { UpdateOrderDto } from './dto/update-order.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
 import { Todo } from './todo.entity';
 import { TodosRepository } from './todos.repository';
@@ -43,5 +44,13 @@ export class TodosService {
     user: User,
   ): Promise<Todo> {
     return this.todosRepository.updateStatus(id, updateStatusDto, user);
+  }
+
+  updateOrder(
+    id: number,
+    updateOrderDto: UpdateOrderDto,
+    user: User,
+  ): Promise<Todo> {
+    return this.todosRepository.updateOrder(id, updateOrderDto, user);
   }
 }

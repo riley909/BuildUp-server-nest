@@ -4,6 +4,7 @@ import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './todo.entity';
 import * as dayjs from 'dayjs';
 import { NotFoundException } from '@nestjs/common';
+import { UpdateContentDto } from './dto/update-content.dto';
 
 @EntityRepository(Todo)
 export class TodosRepository extends Repository<Todo> {
@@ -46,5 +47,16 @@ export class TodosRepository extends Repository<Todo> {
     if (result.affected === 0) {
       throw new NotFoundException(`ID "${id}" not found`);
     }
+  }
+
+  async updateContent(
+    id: number,
+    updateContentDto: UpdateContentDto,
+    user: User,
+  ): Promise<Todo> {
+    const { content } = updateContentDto;
+    const todo = await this.getTodoById(id, user);
+    todo.content = content;
+    return todo;
   }
 }

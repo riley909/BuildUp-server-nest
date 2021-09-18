@@ -15,6 +15,10 @@ export class TodosService {
     return this.todosRepository.getTodos(user);
   }
 
+  getTodoById(id: number, user: User): Promise<Todo> {
+    return this.todosRepository.getTodoById(id, user);
+  }
+
   createTodo(createTodoDto: CreateTodoDto, user: User): Promise<Todo> {
     return this.todosRepository.createTodo(createTodoDto, user);
   }

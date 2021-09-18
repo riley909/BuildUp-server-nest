@@ -86,6 +86,7 @@ export class TodosRepository extends Repository<Todo> {
     const todo = await this.getTodoById(id, user);
     todo.order = order;
 
+    await this.save(todo);
     return todo;
   }
 }

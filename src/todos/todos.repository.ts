@@ -58,6 +58,8 @@ export class TodosRepository extends Repository<Todo> {
     const { content } = updateContentDto;
     const todo = await this.getTodoById(id, user);
     todo.content = content;
+
+    await this.save(todo);
     return todo;
   }
 

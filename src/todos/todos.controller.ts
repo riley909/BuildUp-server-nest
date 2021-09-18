@@ -24,6 +24,11 @@ export class TodosController {
     return this.todosService.getTodos(user);
   }
 
+  @Get('/:id')
+  getTodoById(@Param('id') id: number, @GetUser() user: User): Promise<Todo> {
+    return this.todosService.getTodoById(id, user);
+  }
+
   @Post()
   createTodo(
     @Body() createTodoDto: CreateTodoDto,

@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -11,6 +12,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/auth/user.entity';
 import { CreateTodoDto } from './dto/create-todo.dto';
+import { UpdateContentDto } from './dto/update-content.dto';
 import { Todo } from './todo.entity';
 import { TodosService } from './todos.service';
 
@@ -40,5 +42,14 @@ export class TodosController {
   @Delete('/:id')
   deleteTodo(@Param('id') id: number, @GetUser() user: User): Promise<void> {
     return this.todosService.deleteTodo(id, user);
+  }
+
+  @Patch('/:id/content')
+  updateContent(
+    @Param('id') id: number,
+    @Body() updateContentDto: UpdateContentDto,
+    @GetUser() user: User,
+  ): Promise<Todo> {
+    return this.todosService.updateContent(id, updateContentDto, user);
   }
 }

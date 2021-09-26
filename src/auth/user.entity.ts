@@ -1,5 +1,6 @@
 import { Todo } from '../todos/todo.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -14,6 +15,10 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column({ nullable: true })
+  @Exclude()
+  refreshToken: string;
 
   @OneToMany((_type) => Todo, (todo) => todo.user)
   todos: Todo[];

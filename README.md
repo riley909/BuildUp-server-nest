@@ -18,6 +18,8 @@
 
 ## Server-side Flow chart
 
+</br>
+
 
 # :book: Project Details
 ### [BuildUp-server-nest WIKI](https://github.com/riley909/BuildUp-server-nest/wiki)
